@@ -49,13 +49,25 @@ const updateIssueCount = (count) =>{
     const countElement = document.getElementById("issue-count");
     countElement.innerText = count;
 };
+const renderDetails = (issue) => {
+    document.getElementById("detail_modal").showModal();
+    
+};
+const loadDetails = async (id) =>{
+    const response = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
+    const data = await response.json();
+    renderDetails(data.data);
+
+
+};
+
 const renderCards = (issues) =>{
     updateIssueCount(issues.length);
     const cardContainer = document.getElementById("card-container");
     cardContainer.innerHTML = "";
     for(let issue of issues){
         const card = document.createElement("div");
-        card.innerHTML =`<div id="status-card" class="bg-white rounded-lg shadow-md p-4 border-t-4 ${getBorderColor(issue.status)} space-y-2">
+        card.innerHTML =`<div onClick="loadDetails(${issue.id})" id="status-card" class="bg-white rounded-lg shadow-md p-4 border-t-4 ${getBorderColor(issue.status)} space-y-2">
                     <div class="flex gap-3 justify-between items-center">
                         <img src="./assets/${getStatusImage(issue.status)}">
                         <p class="bg-red-500/10 rounded-2xl px-2 text-[12px]">${issue.priority}</p>
