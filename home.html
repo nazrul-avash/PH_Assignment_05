@@ -93,8 +93,31 @@
 <button class="btn" onclick="detail_modal.showModal()">open modal</button>
 <dialog id="detail_modal" class="modal modal-bottom sm:modal-middle">
   <div class="modal-box">
-    <h3 class="text-lg font-bold">Hello!</h3>
-    <p class="py-4">Press ESC key or click the button below to close</p>
+    <div class="" id="detail-container">
+        <h1 class="font-bold text-2xl">Fix broken image uploads</h1>
+        <div class="flex gap-3 items-center">
+            <button class="btn btn-primary rounded-full">Opened</button>
+            <ul class="flex gap-1">
+                <li>Opened by Fahim Ahmed</li>
+                <li>22/02/2026</li>
+            </ul>
+        </div>
+        <div id="labels" class="flex  items-center Closed- Status ">
+                <h2 class="bg-yellow-300/40 rounded-full px-3 py-2 text-[12px] text-yellow-500"><i class="fa-solid fa-handshake-angle"></i></i> Bug</h2>
+                <h2 class="bg-red-300 rounded-full px-3 py-2 text-[12px]"> <i class="fa-solid fa-anchor-circle-exclamation"></i> good first issue</h2>
+            </div>
+            <h1 class="text-[#64748B]">The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.</h1>
+            <div class="flex justify-evenly bg-gray-200 px-3 py-2 ">
+                <div>
+                    <h1>Assignee:</h1>
+                    <h1>Fahim Ahmed</h1>
+                </div>
+                <div>
+                    <h1>Priority:</h1>
+                    <button class="btn btn-primary rounded-full">HIGH</button>
+                </div>
+            </div>
+    </div>
     <div class="modal-action">
       <form method="dialog">
         <!-- if there is a button in form, it will close the modal -->
