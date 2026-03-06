@@ -78,14 +78,23 @@ const renderCards = (issues) =>{
     manageSpinner(false);
 };
 const buttonSelection = (btnName) =>{
-    document.getElementById
+    document.querySelectorAll("#categoryBtn .btn").forEach((btn) => btn.classList.remove("btn-primary"));
+    if (btnName === "open"){
+        document.getElementById("btn-open").classList.add("btn-primary");
+    }
+    else if (btnName === "closed"){
+        document.getElementById("btn-closed").classList.add("btn-primary");
+    }
+    else {
+        document.getElementById("btn-all").classList.add("btn-primary");
+    }
 };
 const loadCards = async (btnName) =>{
+    buttonSelection(btnName);
     manageSpinner(true);
     const response = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
     const data = await response.json();
     if(btnName !== "btn-all"){
-        
         const filteredArray = data.data.filter((el) => el.status === btnName);
         renderCards(filteredArray);
     }
