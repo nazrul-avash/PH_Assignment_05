@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github Issue Tracker</title>
+    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        *{
+            font-family: "Geist", sans-serif;
+
+        }
+    </style>
+</head>
+<body class="bg-[#F8FAFC]">
+    <div class="hero bg-base-200 min-h-screen ">
+  <div class="hero-content w-[33%]  card bg-base-100  w-full max-w-sm shrink-0 shadow-2xl">
+        <div class="flex flex-col items-center">
+            <img class="mb-6" src="./assets/github-logo.png">
+            <h1 class="text-2xl font-semibold">GitHub Issues Tracker</h1>
+            <h2 class="text-[#64748B] mb-4">Sign in to manage your issues</h2>
+        </div>
+      <div class="card-body w-full ">
+        <fieldset class="fieldset">
+          <label class="label">Username</label>
+          <input type="email" class="input" id="username" placeholder="Enter Username" />
+          <label class="label">Password</label>
+          <input type="password" class="input" id="password" placeholder="Enter Password" />
+          <div><a class="link link-hover">Forgot password?</a></div>
+          <button class="btn btn-primary mt-4" id="btn-signin">Sign In</button>
+          
+        </fieldset>
+        <div class="flex items-center ">
+            <hr class="flex-1 text-[#E4E4E7] m-0">
+            <span class="">OR</span>
+            <hr class="flex-1 text-[#E4E4E7]  m-0">
+          </div>
+          <p class="text-center text-[#64748B] text-[14px]">Demo Credentials:</p>
+          
+          <div class="bg-[#F8FAFC] py-4 text-center">
+            <h2 class="text-[16px]">Username: admin</h2>
+            <h2 class="text-[16px]">Password: admin123</h2>
+          </div>
+      </div>
+   
+  </div>
+</div>
+    <script src="./scripts/index.js"></script>
+</body>
+</html>
