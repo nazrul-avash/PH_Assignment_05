@@ -174,7 +174,7 @@ if (signinBtn) {document.getElementById("btn-signin").addEventListener("click",f
     const  username= document.getElementById("username").value;
     const password = document.getElementById("password").value;
     if(username === 'admin' && password ==="admin123"){
-        alert("login successful");
+        
         window.location.replace("./home.html");
     }
     else{
