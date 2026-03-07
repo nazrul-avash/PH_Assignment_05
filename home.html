@@ -39,7 +39,7 @@
       <path d="m21 21-4.3-4.3"></path>
     </g>
   </svg>
-  <input type="search" required placeholder="Search issues" />
+  <input type="search" id="search-issue" required placeholder="Search issues" />
 </label>
         </div>
         <button class="btn btn-primary">+ New Issue</button>
@@ -90,38 +90,38 @@
         </div>
     </div>
     <!-- Open the modal using ID.showModal() method -->
-<button class="btn" onclick="detail_modal.showModal()">open modal</button>
+<!-- <button class="btn" onclick="detail_modal.showModal()">open modal</button> -->
 <dialog id="detail_modal" class="modal modal-bottom sm:modal-middle">
   <div class="modal-box">
-    <div class="" id="detail-container">
+    <div class="space-y-3" id="detail-container">
         <h1 class="font-bold text-2xl">Fix broken image uploads</h1>
-        <div class="flex gap-3 items-center">
-            <button class="btn btn-primary rounded-full">Opened</button>
-            <ul class="flex gap-1">
-                <li>Opened by Fahim Ahmed</li>
-                <li>22/02/2026</li>
+        <div class="flex gap-10 items-center justify-start">
+            <button class="btn btn-sm rounded-full p-2">Opened</button>
+            <ul class="flex gap-15 list-disc items-center justify-evenly ">
+                <li class="text-[12px] text-[#64748B]">Opened by Fahim Ahmed</li>
+                <li class="text-[12px] text-[#64748B]">22/02/2026</li>
             </ul>
         </div>
-        <div id="labels" class="flex  items-center Closed- Status ">
+        <div id="labels" class="flex  items-center gap-4">
                 <h2 class="bg-yellow-300/40 rounded-full px-3 py-2 text-[12px] text-yellow-500"><i class="fa-solid fa-handshake-angle"></i></i> Bug</h2>
                 <h2 class="bg-red-300 rounded-full px-3 py-2 text-[12px]"> <i class="fa-solid fa-anchor-circle-exclamation"></i> good first issue</h2>
             </div>
-            <h1 class="text-[#64748B]">The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.</h1>
-            <div class="flex justify-evenly bg-gray-200 px-3 py-2 ">
+            <h1 class="text-[12px] text-[#64748B]">The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.</h1>
+            <div class="flex justify-start gap-20 bg-gray-200 px-3 py-2 rounded-2xl">
                 <div>
-                    <h1>Assignee:</h1>
+                    <h1 class="text-[12px] text-[#64748B]">Assignee:</h1>
                     <h1>Fahim Ahmed</h1>
                 </div>
                 <div>
-                    <h1>Priority:</h1>
-                    <button class="btn btn-primary rounded-full">HIGH</button>
+                    <h1 class="text-[12px] text-[#64748B]">Priority:</h1>
+                    <button class="btn btn-sm bg-red-400 rounded-full">HIGH</button>
                 </div>
             </div>
     </div>
     <div class="modal-action">
       <form method="dialog">
         <!-- if there is a button in form, it will close the modal -->
-        <button class="btn">Close</button>
+        <button class="btn btn-primary">Close</button>
       </form>
     </div>
   </div>

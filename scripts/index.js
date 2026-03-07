@@ -1,3 +1,5 @@
+
+
 const getBorderColor = (status) =>{
     if (status === "open"){
         return "border-green-400";
@@ -5,6 +7,18 @@ const getBorderColor = (status) =>{
     else if (status === "closed"){
             return "border-purple-400";
     }
+};
+const getPriorityColor = (priority) =>{
+    if (priority === "high"){
+        return "red";
+    }
+    else if (priority === "medium"){
+            return "yellow";
+    }
+    else if(priority === "low"){
+        return "gray";
+    }
+    
 };
 const getStatusImage = (status) =>{
     if (status === "open"){
@@ -50,6 +64,32 @@ const updateIssueCount = (count) =>{
     countElement.innerText = count;
 };
 const renderDetails = (issue) => {
+    const detailContainer = document.getElementById("detail-container");
+    detailContainer.innerHTML = `  <h1 class="font-bold text-2xl">${issue.title}</h1>
+        <div class="flex gap-10 items-center justify-start">
+            <button class="btn btn-sm bg-green-400 rounded-full p-2">${issue.status}</button>
+            <ul class="flex gap-15 list-disc items-center justify-evenly ">
+                <li class="text-[12px] text-[#64748B]">Opened by ${issue.author}</li>
+                <li class="text-[12px] text-[#64748B]">${issue.createdAt}</li>
+            </ul>
+        </div>
+        <div id="detailLabels-${issue.id}" class="flex  items-center gap-4">
+                
+            </div>
+            <h1 class="text-[12px] text-[#64748B]">The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.</h1>
+            <div class="flex justify-start gap-20 bg-gray-200 px-3 py-2 rounded-2xl">
+                <div>
+                    <h1 class="text-[12px] text-[#64748B]">Assignee:</h1>
+                    <h1>${issue.author}</h1>
+                </div>
+                <div>
+                    <h1 class="text-[12px] text-[#64748B]">Priority:</h1>
+                    <button class="btn btn-sm bg-${getPriorityColor(issue.priority)}-400 rounded-full">${issue.priority}</button>
+                </div>
+            </div>`;
+            const label = document.getElementById(`detailLabels-${issue.id}`);
+            addLabel(label,issue.labels);
+    
     document.getElementById("detail_modal").showModal();
     
 };
@@ -70,7 +110,7 @@ const renderCards = (issues) =>{
         card.innerHTML =`<div onClick="loadDetails(${issue.id})" id="status-card" class="bg-white rounded-lg shadow-md p-4 border-t-4 ${getBorderColor(issue.status)} space-y-2">
                     <div class="flex gap-3 justify-between items-center">
                         <img src="./assets/${getStatusImage(issue.status)}">
-                        <p class="bg-red-500/10 rounded-2xl px-2 text-[12px]">${issue.priority}</p>
+                        <p class="bg-${getPriorityColor(issue.priority)}-500/40 rounded-2xl px-2 text-[12px]">${issue.priority}</p>
                     </div>
                     <h1 class="font-semibold text-[14px]">${issue.title}</h1>
                     <p class="text-[12px] text-[#64748B]">${issue.description}</p>
@@ -89,6 +129,19 @@ const renderCards = (issues) =>{
     }
     manageSpinner(false);
 };
+const searchBox = document.getElementById("search-issue");
+searchBox.addEventListener("keydown", async (e) =>{
+    console.log("event fired");
+    if(e.key ==="Enter"){
+        const key = searchBox.value;
+        const response = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${key}`);
+        const data = await response.json();
+        console.log(data.data);
+        const filteredArray = data.data.filter((el) => el.title.includes(key));
+        console.log(filteredArray);
+        renderCards(filteredArray);
+    }
+});
 const buttonSelection = (btnName) =>{
     document.querySelectorAll("#categoryBtn .btn").forEach((btn) => btn.classList.remove("btn-primary"));
     if (btnName === "open"){
