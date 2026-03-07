@@ -109,7 +109,7 @@ const renderCards = (issues) =>{
     for(let issue of issues){
         console.log(issue.id );
         const card = document.createElement("div");
-        card.innerHTML =`<div onClick="loadDetails(${issue.id})" id="status-card" class="bg-white rounded-lg shadow-md p-4 border-t-4 ${getBorderColor(issue.status)} space-y-2">
+        card.innerHTML =`<div onClick="loadDetails(${issue.id})" id="status-card" class="bg-white h-full rounded-lg shadow-md p-4 border-t-4 ${getBorderColor(issue.status)} space-y-2">
                     <div class="flex gap-3 justify-between items-center">
                         <img src="./assets/${getStatusImage(issue.status)}">
                         <p class="bg-${getPriorityColor(issue.priority)}-500/40 rounded-2xl px-2 text-[12px]">${issue.priority}</p>
@@ -122,7 +122,7 @@ const renderCards = (issues) =>{
                     <hr class="-mx-4 border-gray-300 my-4">
                 
                     <p class="text-[12px] text-[#64748B]">#${issue.id} by ${issue.author}</p>
-                    <h2 class="text-[12px] text-[#64748B]">${issue.createdAt}</h2>
+                    <h2 class="text-[12px] text-[#64748B]">${issue.createdAt.split("T")[0]}</h2>
                 </div>`;
                 cardContainer.append(card);
                 const label = document.getElementById(`labels-${issue.id}`);
@@ -131,20 +131,31 @@ const renderCards = (issues) =>{
     }
     manageSpinner(false);
 };
+async function searchIssues() {
+    const key = searchBox.value;
+
+    const response = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${key}`);
+    const data = await response.json();
+
+    const filteredArray = data.data.filter((el) => el.title.includes(key));
+
+    renderCards(filteredArray);
+}
 const searchBox = document.getElementById("search-issue");
 if (searchBox){
-    searchBox.addEventListener("keydown", async (e) =>{
-    if(e.key ==="Enter"){
-        const key = searchBox.value;
-        const response = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${key}`);
-        const data = await response.json();
-        console.log(data.data);
-        const filteredArray = data.data.filter((el) => el.title.includes(key));
-        console.log(filteredArray);
-        renderCards(filteredArray);
-    }
-});
+   searchBox.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            searchIssues();
+        }
+    });
+
 }
+const searchBtn = document.getElementById("search-btn");
+
+if (searchBtn) {
+    searchBtn.addEventListener("click", searchIssues);
+}
+
 const buttonSelection = (btnName) =>{
     document.querySelectorAll("#categoryBtn .btn").forEach((btn) => btn.classList.remove("btn-primary"));
     if (btnName === "open"){
