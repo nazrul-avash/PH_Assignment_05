@@ -107,6 +107,7 @@ const renderCards = (issues) =>{
     const cardContainer = document.getElementById("card-container");
     cardContainer.innerHTML = "";
     for(let issue of issues){
+        console.log(issue.id );
         const card = document.createElement("div");
         card.innerHTML =`<div onClick="loadDetails(${issue.id})" id="status-card" class="bg-white rounded-lg shadow-md p-4 border-t-4 ${getBorderColor(issue.status)} space-y-2">
                     <div class="flex gap-3 justify-between items-center">
@@ -120,7 +121,7 @@ const renderCards = (issues) =>{
                     </div>
                     <hr class="-mx-4 border-gray-300 my-4">
                 
-                    <p class="text-[12px] text-[#64748B]">#1 by ${issue.author}</p>
+                    <p class="text-[12px] text-[#64748B]">#${issue.id} by ${issue.author}</p>
                     <h2 class="text-[12px] text-[#64748B]">${issue.createdAt}</h2>
                 </div>`;
                 cardContainer.append(card);
