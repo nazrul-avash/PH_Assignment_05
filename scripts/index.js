@@ -1,5 +1,6 @@
 
 
+
 const getBorderColor = (status) =>{
     if (status === "open"){
         return "border-green-400";
@@ -130,8 +131,8 @@ const renderCards = (issues) =>{
     manageSpinner(false);
 };
 const searchBox = document.getElementById("search-issue");
-searchBox.addEventListener("keydown", async (e) =>{
-    console.log("event fired");
+if (searchBox){
+    searchBox.addEventListener("keydown", async (e) =>{
     if(e.key ==="Enter"){
         const key = searchBox.value;
         const response = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${key}`);
@@ -142,6 +143,7 @@ searchBox.addEventListener("keydown", async (e) =>{
         renderCards(filteredArray);
     }
 });
+}
 const buttonSelection = (btnName) =>{
     document.querySelectorAll("#categoryBtn .btn").forEach((btn) => btn.classList.remove("btn-primary"));
     if (btnName === "open"){
@@ -166,12 +168,11 @@ const loadCards = async (btnName) =>{
     else renderCards(data.data);
     
 };
-let statusBtnSelected = "btn-all";
-loadCards(statusBtnSelected);
-document.getElementById("btn-signin").addEventListener("click",function(){
+const signinBtn = document.getElementById("btn-signin");
+if (signinBtn) {document.getElementById("btn-signin").addEventListener("click",function(){
     const  username= document.getElementById("username").value;
     const password = document.getElementById("password").value;
-    if(username === 'admin' && password==="admin123"){
+    if(username === 'admin' && password ==="admin123"){
         alert("login successful");
         window.location.replace("./home.html");
     }
@@ -180,5 +181,8 @@ document.getElementById("btn-signin").addEventListener("click",function(){
         return;
 
     }
-});
+});}
 
+  let statusBtnSelected = "btn-all";
+        loadCards(statusBtnSelected);
+        
